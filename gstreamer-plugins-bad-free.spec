@@ -7,7 +7,7 @@
 Summary: GStreamer streaming media framework "bad" plug-ins
 Name: gstreamer-plugins-bad-free
 Version: 0.10.19
-Release: 2%{?dist}
+Release: 3%{?dist}
 # The freeze and nfs plugins are LGPLv2 (only)
 License: LGPLv2+ and LGPLv2
 Group: Applications/Multimedia
@@ -17,6 +17,7 @@ URL: http://gstreamer.freedesktop.org/
 # modified with gst-p-bad-cleanup.sh from SOURCE1
 Source: gst-plugins-bad-free-%{version}.tar.bz2
 Source1: gst-p-bad-cleanup.sh
+Patch0: gst-plugins-bad-doc-build.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires: %{gstreamer} >= %{gst_minver}
@@ -27,7 +28,7 @@ BuildRequires: check
 BuildRequires: gettext-devel
 BuildRequires: PyXML
 BuildRequires: libXt-devel
-BuildRequireS: gtk-doc
+BuildRequires: gtk-doc
 
 BuildRequires: bzip2-devel
 BuildRequires: exempi-devel
@@ -40,7 +41,7 @@ BuildRequires: libmpcdec-devel
 BuildRequires: liboil-devel
 BuildRequires: librsvg2-devel
 BuildRequires: libsndfile-devel
-BuildRequires: libvpx-devel
+BuildRequires: libvpx-devel >= 1.3.0
 BuildRequires: mesa-libGLU-devel
 BuildRequires: openssl-devel
 BuildRequires: SDL-devel
@@ -110,6 +111,7 @@ aren't tested well enough, or the code is not of good enough quality.
 
 %prep
 %setup -q -n gst-plugins-bad-%{version}
+%patch0 -p1 -b .doc-build
 
 %build
 %configure \
@@ -239,6 +241,9 @@ aren't tested well enough, or the code is not of good enough quality.
 %doc %{_datadir}/gtk-doc/html/gst-plugins-bad-plugins-%{majorminor}
 
 %changelog
+* Thu Aug 21 2014 Martin Stransky <stransky@redhat.com> 0.10.19-3
+- Rebuilt for new libvpx
+
 * Wed Jun 27 2010 Benjamin Otte <otte@redhat.com> 0.10.19-2
 - Build libvpx plugin
 Resolves: rhbz#603110
