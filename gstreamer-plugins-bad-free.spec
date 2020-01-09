@@ -7,7 +7,7 @@
 Summary: GStreamer streaming media framework "bad" plug-ins
 Name: gstreamer-plugins-bad-free
 Version: 0.10.19
-Release: 3%{?dist}
+Release: 5%{?dist}
 # The freeze and nfs plugins are LGPLv2 (only)
 License: LGPLv2+ and LGPLv2
 Group: Applications/Multimedia
@@ -18,6 +18,7 @@ URL: http://gstreamer.freedesktop.org/
 Source: gst-plugins-bad-free-%{version}.tar.bz2
 Source1: gst-p-bad-cleanup.sh
 Patch0: gst-plugins-bad-doc-build.patch
+Patch1: 0001-vmncdec-Sanity-check-width-height-before-using-it.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires: %{gstreamer} >= %{gst_minver}
@@ -112,13 +113,14 @@ aren't tested well enough, or the code is not of good enough quality.
 %prep
 %setup -q -n gst-plugins-bad-%{version}
 %patch0 -p1 -b .doc-build
+%patch1 -p1 -b .0001
 
 %build
 %configure \
     --with-package-name="Fedora gstreamer-plugins-bad package" \
     --with-package-origin="http://download.fedora.redhat.com/fedora" \
     --enable-debug --disable-static --enable-gtk-doc --enable-experimental \
-    --disable-divx
+    --disable-divx --disable-nsf
 
 %{__make} %{?_smp_mflags}
 
@@ -177,7 +179,6 @@ aren't tested well enough, or the code is not of good enough quality.
 %{_libdir}/gstreamer-%{majorminor}/libgstmpegvideoparse.so
 %{_libdir}/gstreamer-%{majorminor}/libgstmve.so
 %{_libdir}/gstreamer-%{majorminor}/libgstmxf.so
-%{_libdir}/gstreamer-%{majorminor}/libgstnsf.so
 %{_libdir}/gstreamer-%{majorminor}/libgstnuvdemux.so
 %{_libdir}/gstreamer-%{majorminor}/libgstpcapparse.so
 %{_libdir}/gstreamer-%{majorminor}/libgstpnm.so
@@ -241,6 +242,14 @@ aren't tested well enough, or the code is not of good enough quality.
 %doc %{_datadir}/gtk-doc/html/gst-plugins-bad-plugins-%{majorminor}
 
 %changelog
+* Tue Dec 06 2016 Wim Taymans <wtaymans@redhat.com> 0.10.19-5
+- vmncdec: Sanity-check width/height before using it
+Resolves: rhbz#1400820
+
+* Tue Dec 06 2016 Wim Taymans <wtaymans@redhat.com> 0.10.19-4
+- Remove insecure NSF decoder
+Resolves: rhbz#1400820
+
 * Thu Aug 21 2014 Martin Stransky <stransky@redhat.com> 0.10.19-3
 - Rebuilt for new libvpx
 
