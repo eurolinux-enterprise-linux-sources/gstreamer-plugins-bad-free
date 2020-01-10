@@ -14,7 +14,7 @@
 Summary: GStreamer streaming media framework "bad" plug-ins
 Name: gstreamer-plugins-bad-free
 Version: 0.10.23
-Release: 22%{?dist}
+Release: 23%{?dist}
 # The freeze and nfs plugins are LGPLv2 (only)
 License: LGPLv2+ and LGPLv2
 Group: Applications/Multimedia
@@ -368,14 +368,18 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Tue Mar 07 2017 Wim Taymans <wtaymans@redhat.com> - 0.10.23-23
+- Rebuild with hardened flags
+Resolves: #1420764
+
 * Wed Dec 07 2016 Wim Taymans <wtaymans@redhat.com> - 0.10.23-22
 - h264parse: Ensure codec_data has the required size when reading number of SPS
-Resolves: rhbz#1400838
+Resolves: rhbz#1400839
 
 * Tue Dec 06 2016 Wim Taymans <wtaymans@redhat.com> - 0.10.23-21
 - Remove insecure NSF plugin
 - vmncdec: Sanity-check width/height before using it
-Resolves: rhbz#1400838
+Resolves: rhbz#1400839
 
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.10.23-20
 - Mass rebuild 2014-01-24
