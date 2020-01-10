@@ -14,7 +14,7 @@
 Summary: GStreamer streaming media framework "bad" plug-ins
 Name: gstreamer-plugins-bad-free
 Version: 0.10.23
-Release: 18%{?dist}
+Release: 20%{?dist}
 # The freeze and nfs plugins are LGPLv2 (only)
 License: LGPLv2+ and LGPLv2
 Group: Applications/Multimedia
@@ -365,6 +365,12 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.10.23-20
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.10.23-19
+- Mass rebuild 2013-12-27
+
 * Sat May 04 2013 Colin Walters <walters@verbum.org> 0.10.23-18
 - Move soundtouch-devel BR to outside RHEL conditional, since
   it is available there.
