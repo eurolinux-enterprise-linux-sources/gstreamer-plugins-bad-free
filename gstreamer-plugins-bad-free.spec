@@ -14,7 +14,7 @@
 Summary: GStreamer streaming media framework "bad" plug-ins
 Name: gstreamer-plugins-bad-free
 Version: 0.10.23
-Release: 20%{?dist}
+Release: 22%{?dist}
 # The freeze and nfs plugins are LGPLv2 (only)
 License: LGPLv2+ and LGPLv2
 Group: Applications/Multimedia
@@ -35,6 +35,8 @@ Patch4: 0004-camerabin-Set-src_filter-and-zoom_src_filter-caps-wh.patch
 Patch5: 0005-geometrictransform-crash-fix1.patch
 Patch6: 0006-geometrictransform-crash-fix2.patch
 Patch7: 0001-Delete-unbuilt-plugins-from-the-docs.patch
+Patch8: 0001-vmncdec-Sanity-check-width-height-before-using-it.patch
+Patch9: 0001-h264parse-Ensure-codec_data-has-the-required-size-wh.patch
 
 Requires: %{gstreamer} >= %{gst_minver}
 BuildRequires: %{gstreamer}-devel >= %{gst_minver}
@@ -168,6 +170,8 @@ aren't tested well enough, or the code is not of good enough quality.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
 sed -i 's/opencv <= 2.3.1/opencv <= 2.4.3/g' configure
 
 
@@ -179,7 +183,7 @@ sed -i 's/opencv <= 2.3.1/opencv <= 2.4.3/g' configure
     --enable-debug --disable-static --enable-gtk-doc --enable-experimental \
     --disable-divx --disable-dts --disable-faac --disable-faad --disable-nas \
     --disable-mimic --disable-libmms --disable-mpeg2enc --disable-mplex \
-    --disable-neon --disable-openal --disable-rtmp --disable-xvid
+    --disable-neon --disable-openal --disable-rtmp --disable-xvid --disable-nsf
 make %{?_smp_mflags}
 
 
@@ -255,7 +259,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/gstreamer-%{majorminor}/libgstmpegvideoparse.so
 %{_libdir}/gstreamer-%{majorminor}/libgstmve.so
 %{_libdir}/gstreamer-%{majorminor}/libgstmxf.so
-%{_libdir}/gstreamer-%{majorminor}/libgstnsf.so
 %{_libdir}/gstreamer-%{majorminor}/libgstnuvdemux.so
 %{_libdir}/gstreamer-%{majorminor}/libgstpatchdetect.so
 %{_libdir}/gstreamer-%{majorminor}/libgstpcapparse.so
@@ -365,6 +368,15 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Wed Dec 07 2016 Wim Taymans <wtaymans@redhat.com> - 0.10.23-22
+- h264parse: Ensure codec_data has the required size when reading number of SPS
+Resolves: rhbz#1400838
+
+* Tue Dec 06 2016 Wim Taymans <wtaymans@redhat.com> - 0.10.23-21
+- Remove insecure NSF plugin
+- vmncdec: Sanity-check width/height before using it
+Resolves: rhbz#1400838
+
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.10.23-20
 - Mass rebuild 2014-01-24
 
