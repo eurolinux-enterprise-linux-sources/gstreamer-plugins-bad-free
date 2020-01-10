@@ -1,0 +1,73 @@
+From 6bc5fda6d9914e7de31af84ccd9e843e0c1cb398 Mon Sep 17 00:00:00 2001
+From: Colin Walters <walters@verbum.org>
+Date: Thu, 2 May 2013 17:04:02 -0400
+Subject: [PATCH] Delete unbuilt plugins from the docs
+
+So the gtk-doc builds, and life can go on.
+---
+ docs/plugins/Makefile.am                          |    1 -
+ docs/plugins/gst-plugins-bad-plugins-docs.sgml    |    2 --
+ docs/plugins/gst-plugins-bad-plugins-sections.txt |   15 ---------------
+ 3 files changed, 0 insertions(+), 18 deletions(-)
+
+diff --git a/docs/plugins/Makefile.am b/docs/plugins/Makefile.am
+index 99f280d..e8c7434 100644
+--- a/docs/plugins/Makefile.am
++++ b/docs/plugins/Makefile.am
+@@ -103,7 +103,6 @@ EXTRA_HFILES = \
+ 	$(top_srcdir)/ext/timidity/gsttimidity.h \
+ 	$(top_srcdir)/ext/timidity/gstwildmidi.h \
+ 	$(top_srcdir)/ext/voaacenc/gstvoaacenc.h \
+-	$(top_srcdir)/ext/voamrwbenc/gstvoamrwbenc.h \
+ 	$(top_srcdir)/ext/vp8/gstvp8enc.h \
+ 	$(top_srcdir)/ext/vp8/gstvp8dec.h \
+ 	$(top_srcdir)/ext/zbar/gstzbar.h \
+diff --git a/docs/plugins/gst-plugins-bad-plugins-docs.sgml b/docs/plugins/gst-plugins-bad-plugins-docs.sgml
+index 07fcdaa..10e7b5b 100644
+--- a/docs/plugins/gst-plugins-bad-plugins-docs.sgml
++++ b/docs/plugins/gst-plugins-bad-plugins-docs.sgml
+@@ -127,7 +127,6 @@
+     <xi:include href="xml/element-wildmidi.xml" />
+     <xi:include href="xml/element-zbar.xml" />
+     <xi:include href="xml/element-voaacenc.xml" />
+-    <xi:include href="xml/element-voamrwbenc.xml" />
+     <xi:include href="xml/element-vp8dec.xml" />
+     <xi:include href="xml/element-vp8enc.xml" />
+     <xi:include href="xml/element-wavescope.xml" />
+@@ -221,7 +220,6 @@
+     <xi:include href="xml/plugin-wildmidi.xml" />
+     <xi:include href="xml/plugin-xvid.xml" />
+     <xi:include href="xml/plugin-voaacenc.xml" />
+-    <xi:include href="xml/plugin-voamrwbenc.xml" />
+     <xi:include href="xml/plugin-vp8.xml" />
+     <xi:include href="xml/plugin-zbar.xml" />
+   </chapter>
+diff --git a/docs/plugins/gst-plugins-bad-plugins-sections.txt b/docs/plugins/gst-plugins-bad-plugins-sections.txt
+index d7fc96e..6ddc81d 100644
+--- a/docs/plugins/gst-plugins-bad-plugins-sections.txt
++++ b/docs/plugins/gst-plugins-bad-plugins-sections.txt
+@@ -1667,21 +1667,6 @@ GST_TYPE_VOAACENC
+ gst_voaacenc_get_type
+ </SECTION>
+ 
+-<SECTION>
+-<FILE>element-voamrwbenc</FILE>
+-<TITLE>voamrwbenc</TITLE>
+-GstVoAmrwbEnc
+-<SUBSECTION Standard>
+-GstVoAmrwbEncClass
+-GST_VOAMRWBENC
+-GST_VOAMRWBENC_CLASS
+-GST_IS_VOAMRWBENC
+-GST_IS_VOAMRWBENC_CLASS
+-GST_TYPE_VOAMRWBENC
+-gst_voamrwbenc_get_type
+-</SECTION>
+-
+-<SECTION>
+ <FILE>element-vp8dec</FILE>
+ <TITLE>vp8dec</TITLE>
+ GstVP8Dec
+-- 
+1.7.1
+
